@@ -23,4 +23,9 @@ for i=1:sz
 end
 D=newI;
 end
+function snr = ImageSnr(oriI, noiI)  
+    ps = sum((oriI(:)-mean(oriI(:))).^2); % signal power  
+    pn = sum((oriI(:)-noiI(:)).^2);  
+    snr = 10*log10(ps/pn);  
+end  
            
