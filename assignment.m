@@ -2,13 +2,21 @@ mypicture=imread('C:\Users\Admin\Desktop\DA\Image and Video Analysisi\coursework
 mypicture=im2double(mypicture);
 
 % mypicture
-FF1=dctforward(mypicture);
+t=dctforward(mypicture(:,:,1));
 % FF=dct(mypicture);
 figure(),imshow(mypicture)
 % FF2=blockn(mypicture);
-FF3=dctbackward(FF1)
+FF3=dctbackward(FF1);
+FF4=blkproc(mypicture(:,:,2),[8 8],'dctforward(x)');
+FF5=blkproc(FF4,[8 8],'dctbackward(x)');
+FF51=blkproc(FF41,[8 8],'dctbackward(x)');
+FF52=blkproc(FF42,[8 8],'dctbackward(x)');
+FFF5(:,:,1)=FF51;
+FFF5(:,:,2)=FF5
+FFF5(:,:,3)=FF52
+FF5;
 subplot(1,1,1);
-imshow(FF3);title('backward');
+imshow(FFF5);title('backward');
 
 
 function D=dctforward(I)
@@ -25,10 +33,11 @@ for i = 0:m-1
         end
     end
 end
+% D=DM;
 D=DM*I(:,:,1)*DM';
 % D2=DM*I(:,:,2)*DM';
 % D3=DM*I(:,:,3)*DM';
-imshow(D)
+% imshow(D)
 end
 
 function D=dctbackward(I)
@@ -48,7 +57,7 @@ end
 D=DM'*I(:,:,1)*DM;
 % D2=DM*I(:,:,2)*DM';
 % D3=DM*I(:,:,3)*DM';
-imshow(D)
+% imshow(D)
 end
 % function B=blockn(I)
 % sz=size(I);
