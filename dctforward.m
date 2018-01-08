@@ -1,4 +1,4 @@
-function D=dctforward(I)
+ function D=dctforward(I)
 sz=size(I);
 m=sz(1);
 DM=zeros(m,m);

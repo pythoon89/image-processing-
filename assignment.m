@@ -6,59 +6,69 @@ t=dctforward(mypicture(:,:,1));
 % FF=dct(mypicture);
 figure(),imshow(mypicture)
 % FF2=blockn(mypicture);
-FF3=dctbackward(FF1);
+% FF3=dctbackward(FF1);
 FF4=blkproc(mypicture(:,:,2),[8 8],'dctforward(x)');
+FF41=blkproc(mypicture(:,:,1),[8 8],'dctforward(x)');
+FF42=blkproc(mypicture(:,:,3),[8 8],'dctforward(x)');
 FF5=blkproc(FF4,[8 8],'dctbackward(x)');
 FF51=blkproc(FF41,[8 8],'dctbackward(x)');
 FF52=blkproc(FF42,[8 8],'dctbackward(x)');
 FFF5(:,:,1)=FF51;
-FFF5(:,:,2)=FF5
-FFF5(:,:,3)=FF52
+FFF5(:,:,2)=FF5;
+FFF5(:,:,3)=FF52;
 FF5;
+imwrite(FFF5, 'C:\Users\Admin\Desktop\DA\Image and Video Analysisi\coursework\data\lena2.png');
 subplot(1,1,1);
 imshow(FFF5);title('backward');
+cr=Dlc2(FF51);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function D=dctforward(I)
-sz=size(I);
-m=sz(1);
-DM=zeros(m,m);
+% 
+% f1 =  imfinfo('C:\Users\Admin\Desktop\DA\Image and Video Analysisi\coursework\data\lena.bmp');
+% f2 =  imfinfo('C:\Users\Admin\Desktop\DA\Image and Video Analysisi\coursework\data\lena2.png');
+% r = f2.FileSize/f1.FileSize
 
-for i = 0:m-1
-    for j = 0:m-1
-        if i == 0
-            DM(i+1,j+1) = ((1/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
-        else
-            DM(i+1,j+1) = ((2/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
-        end
-    end
-end
-% D=DM;
-D=DM*I(:,:,1)*DM';
-% D2=DM*I(:,:,2)*DM';
-% D3=DM*I(:,:,3)*DM';
-% imshow(D)
-end
-
-function D=dctbackward(I)
-sz=size(I);
-m=sz(1);
-DM=zeros(m,m);
-
-for i = 0:m-1
-    for j = 0:m-1
-        if i == 0
-            DM(i+1,j+1) = ((1/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
-        else
-            DM(i+1,j+1) = ((2/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
-        end
-    end
-end
-D=DM'*I(:,:,1)*DM;
-% D2=DM*I(:,:,2)*DM';
-% D3=DM*I(:,:,3)*DM';
-% imshow(D)
-end
+% function D=dctforward(I)
+% sz=size(I);
+% m=sz(1);
+% DM=zeros(m,m);
+% 
+% for i = 0:m-1
+%     for j = 0:m-1
+%         if i == 0
+%             DM(i+1,j+1) = ((1/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
+%         else
+%             DM(i+1,j+1) = ((2/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
+%         end
+%     end
+% end
+% % D=DM;
+% D=DM*I(:,:,1)*DM';
+% % D2=DM*I(:,:,2)*DM';
+% % D3=DM*I(:,:,3)*DM';
+% % imshow(D)
+% end
+% 
+% function D=dctbackward(I)
+% sz=size(I);
+% m=sz(1);
+% DM=zeros(m,m);
+% 
+% for i = 0:m-1
+%     for j = 0:m-1
+%         if i == 0
+%             DM(i+1,j+1) = ((1/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
+%         else
+%             DM(i+1,j+1) = ((2/m)^0.5)*cos(((2*j+1)*i*pi)/(2*m));
+%         end
+%     end
+% end
+% D=DM'*I(:,:,1)*DM;
+% % D2=DM*I(:,:,2)*DM';
+% % D3=DM*I(:,:,3)*DM';
+% % imshow(D)
+% end
 % function B=blockn(I)
 % sz=size(I);
 % nr=sz(1);
