@@ -1,5 +1,4 @@
 function D=Dlc2(Image)
-%%%%%%%%%%%%%%%%%%%%%%%%%%
 length=size(Image);
 len=length(1)*length(2);
 Im=zeros(1,len);
@@ -11,18 +10,18 @@ in=1;
          in=in+1;
     end
     end
-jj=1;
+    j=1;
 run(1)=1;
 for i=1:(len-1)
     if Im(i)~=Im(i+1)
-        data(jj)=Im(i);
-         jj=jj+1;
-        run(jj)=1;
+        data(j)=Im(i);
+         j=j+1;
+        run(j)=1;
     else
-         run(jj)=run(jj)+1;
+         run(j)=run(j)+1;
     end
 end
-data(jj)=Im(len);
+data(j)=Im(len);
 D{1}=run;
 D{2}=data;
 end

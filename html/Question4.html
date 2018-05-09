@@ -1,0 +1,148 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Question4</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-01-10"><meta name="DC.source" content="Question4.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">addpath(<span class="string">'C:\Users\Admin\Desktop\DA\Image and Video Analysisi\coursework\data\'</span>);
+inputimage=imread(<span class="string">'Lena.bmp'</span>);
+<span class="comment">%if the input image is not gray version transfer it into gray version.</span>
+<span class="keyword">if</span> ndims(inputimage)==3
+    inputimage=rgb2gray(inputimage);
+<span class="keyword">else</span>
+    inputimage=inputimage;
+<span class="keyword">end</span>
+im=im2double(inputimage);
+<span class="comment">%calculate the value of Gauss kernel, the radius is 2 and the sigma is 1.2.</span>
+G=Gauss21(2,1.2);
+gsspy=Gaussianp(im,G);
+lplpy=LaplacianP(gsspy,G);
+lpre=laplacere(gsspy,lplpy,G);
+<span class="comment">%print the Gaussian and Laplace Pyramid.</span>
+<span class="comment">% for i=1:3</span>
+<span class="comment">%     figure;imshow(lplpy{i});</span>
+<span class="comment">%     title('Laplacian Pyramid');</span>
+<span class="comment">%     figure;imshow(gsspy{i});</span>
+<span class="comment">%     title('Gaussian Pyramid');</span>
+<span class="comment">% end</span>
+<span class="comment">% figure;imshow(lpre);</span>
+<span class="comment">% title('reconstruction');</span>
+<span class="comment">%calculate the value of SNR and compression rate under different threshold.</span>
+a=1;
+<span class="keyword">for</span> threshold=0.01:0.025:1
+    [cr(a),comladata]=lacomrate(im,lplpy,threshold);
+    lapre=laplacere(gsspy,comladata,G);
+
+    snr(a)=ImageSnr(im,lapre);
+    a=a+1;
+<span class="keyword">end</span>
+figure; plot(cr,snr)
+   title(<span class="string">'Image Pyramid Rate-Distortion Curve, Lena'</span>)
+   xlabel(<span class="string">'CR(bpps)'</span>)
+   ylabel(<span class="string">'SNR(dBs)'</span>)
+</pre><img vspace="5" hspace="5" src="Question4_01.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+addpath('C:\Users\Admin\Desktop\DA\Image and Video Analysisi\coursework\data\');
+inputimage=imread('Lena.bmp');
+%if the input image is not gray version transfer it into gray version.
+if ndims(inputimage)==3
+    inputimage=rgb2gray(inputimage);
+else
+    inputimage=inputimage;
+end
+im=im2double(inputimage);
+%calculate the value of Gauss kernel, the radius is 2 and the sigma is 1.2.
+G=Gauss21(2,1.2);
+gsspy=Gaussianp(im,G);
+lplpy=LaplacianP(gsspy,G);
+lpre=laplacere(gsspy,lplpy,G);
+%print the Gaussian and Laplace Pyramid.
+% for i=1:3
+%     figure;imshow(lplpy{i});
+%     title('Laplacian Pyramid');
+%     figure;imshow(gsspy{i});
+%     title('Gaussian Pyramid');
+% end
+% figure;imshow(lpre);
+% title('reconstruction');
+%calculate the value of SNR and compression rate under different threshold.
+a=1;
+for threshold=0.01:0.025:1
+    [cr(a),comladata]=lacomrate(im,lplpy,threshold);
+    lapre=laplacere(gsspy,comladata,G);
+    
+    snr(a)=ImageSnr(im,lapre);
+    a=a+1;
+end
+figure; plot(cr,snr)
+   title('Image Pyramid Rate-Distortion Curve, Lena')
+   xlabel('CR(bpps)')
+   ylabel('SNR(dBs)')
+
+
+
+##### SOURCE END #####
+--></body></html>

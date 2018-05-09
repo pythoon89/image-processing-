@@ -1,4 +1,9 @@
+
+
+% DCT forward
+
 function D=dctbackward(I)
+%estimate the size of input picture.
 sz=size(I);
 m=sz(1);
 DM=zeros(m,m);
@@ -12,8 +17,6 @@ for i = 0:m-1
         end
     end
 end
+%reconstruct the picture
 D=DM'*I(:,:,1)*DM;
-% D2=DM*I(:,:,2)*DM';
-% D3=DM*I(:,:,3)*DM';
-% imshow(D)
 end

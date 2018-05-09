@@ -1,8 +1,10 @@
- function D=dctforward(I)
+
+function D=dctforward(I)
+% estimate the size of  input picture "I"
 sz=size(I);
 m=sz(1);
 DM=zeros(m,m);
-
+%build dct matrix 
 for i = 0:m-1
     for j = 0:m-1
         if i == 0
@@ -12,9 +14,6 @@ for i = 0:m-1
         end
     end
 end
-% D=DM;
+%process dct transform.
 D=DM*I(:,:,1)*DM';
-% D2=DM*I(:,:,2)*DM';
-% D3=DM*I(:,:,3)*DM';
-% imshow(D)
 end
